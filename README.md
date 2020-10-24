@@ -1,5 +1,5 @@
 # MagicKeyboardChacker
 
-Usage:
- 
-./usbchecker url
+### Usage:
+
+`./binary_name url`
