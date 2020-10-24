@@ -1,0 +1,5 @@
+# MagicKeyboardChacker
+
+Usage:
+ 
+./usbchecker url
