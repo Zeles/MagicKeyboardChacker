@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+var Version string
+
 func GetLogin() (string, error) {
 	const command = "who | grep console | awk '{print $1}'"
 	login, err := exec.Command("bash", "-c", command).Output()
@@ -37,6 +39,11 @@ func GetHostname() string {
 }
 
 func main() {
+	log.Print("Version: ", Version)
+
+	log.Println("KeyboardChecker init. delayed start 1 minute")
+	time.Sleep(time.Minute)
+
 	conn, err := net.Dial("udp", os.Args[1])
 	if err != nil {
 		log.Println(err)

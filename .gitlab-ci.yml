@@ -1,0 +1,53 @@
+stages:
+  - init
+  - test
+  - build
+  - deploy
+
+before_script:
+  - export PATH=$PATH:/tmp/go/bin:/Users/macosformunki/go/bin
+
+check_golang:
+  stage: init
+  script:
+    - uname -a
+    - >
+      if [[ "$(which go)" == *"go"* ]]; then
+        echo "Go already installed"
+      else
+        curl https://dl.google.com/go/go1.14.4.darwin-amd64.tar.gz 2>/dev/null > /tmp/go1.14.4.darwin-amd64.tar.gz
+        tar -C /tmp -xzf /tmp/go1.14.4.darwin-amd64.tar.gz
+      fi
+    - go version
+    - go get -u golang.org/x/lint/golint
+    - mkdir -p /tmp/zel/ /tmp/zel/go/src/_/builds
+    - echo $CI_PROJECT_DIR
+    - cp -fr $CI_PROJECT_DIR /tmp/zel/
+    - ln -fs /tmp/go/src/gitlab.21-school.ru/zel /tmp/zel/go/src/_/builds/zel
+    - go mod tidy
+  tags:
+    - osx
+
+test:
+  stage: test
+  script:
+    - go test
+  tags:
+    - osx
+
+build:
+  stage: build
+  before_script:
+    - export PATH=$PATH:/tmp/go/bin:/Users/macosformunki/go/bin
+  script:
+    - bash build.sh
+  tags:
+    - osx
+
+deploy:
+  when: manual
+  stage: deploy
+  script:
+    - scp /tmp/KeyboardChecker.pkg master@releases.msk.21-school.ru:./release
+  tags:
+    - osx
