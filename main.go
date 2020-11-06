@@ -70,7 +70,7 @@ func main() {
 			}
 		} else {
 			if usb {
-				conn.Write([]byte(fmt.Sprintf("<30> %s [%s] Magic Keyboard: disabled", GetHostname(), login)))
+				conn.Write([]byte(fmt.Sprintf("{%s} <30> %s [%s] Magic Keyboard: disabled", time.Now().String(), GetHostname(), login)))
 				usb = false
 			}
 		}
