@@ -16,6 +16,5 @@ mkdir -p $PKG_ROOT/usr/local/KeyboardChecker
 mkdir -p $PKG_ROOT/Library/LaunchDaemons
 
 mv $BUILD_DIR/$PACKAGE_NAME $PKG_ROOT/usr/local/KeyboardChecker/KeyboardChecker
-cp -r $RESSOURCES/ru.21-school.macreport.plist $PKG_ROOT/Library/LaunchDaemons
 
 pkgbuild --identifier $PACKAGE_NAME --version $VERSION --root $PKG_ROOT --install-location / $OUTFILE

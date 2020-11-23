@@ -22,7 +22,7 @@ func GetLogin() (string, error) {
 }
 
 func DetectMagicKeyboard() (bool, error) {
-	out, err := exec.Command("bash", "-c", "\"system_profiler SPUSBDataType 2> /dev/null | grep 'Magic Keyboard'\"").Output()
+	out, err := exec.Command("bash", "-c", "system_profiler SPUSBDataType 2> /dev/null | grep 'Magic Keyboard'").Output()
 	if err != nil {
 		return false, err
 	}
